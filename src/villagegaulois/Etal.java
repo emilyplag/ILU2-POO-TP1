@@ -50,6 +50,8 @@ public class Etal {
 
 	public String acheterProduit(int quantiteAcheter, Gaulois acheteur)throws IllegalStateException,IllegalArgumentException {
 			try{StringBuilder chaine = new StringBuilder();
+			if (quantiteAcheter<0) { throw new IllegalArgumentException("c'est pas bon la quantite");}
+			if (!etalOccupe) {throw new IllegalStateException("l'etal est pas occupe");}
 			chaine.append(acheteur.getNom() + " veut acheter " + quantiteAcheter
 					+ " " + produit + " à " + vendeur.getNom());
 			if (quantite == 0) {

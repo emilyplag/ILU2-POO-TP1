@@ -128,11 +128,22 @@ public class Village {
 		public VillageSansChefException() {
 			
 		}
+		public VillageSansChefException(String message) {
+			super(message);
+		}
+		public VillageSansChefException(Throwable cause) {
+			super(cause);
+		}
+		public VillageSansChefException(Throwable cause,String message) {
+			super(message,cause);
+		}
 	}
 	
 	
 	public String afficherVillageois() throws VillageSansChefException {
 		StringBuilder chaine = new StringBuilder();
+		try {
+		if (chef==null) {throw new VillageSansChefException("il n'y a pas de chef");}
 		if (nbVillageois < 1) {
 			chaine.append("Il n'y a encore aucun habitant au village du chef "
 					+ chef.getNom() + ".\n");
@@ -143,11 +154,15 @@ public class Village {
 				chaine.append("- " + villageois[i].getNom() + "\n");
 			}
 		}
-		return chaine.toString();
+		
+		}catch (VillageSansChefException e){e.printStackTrace();}
+		finally {return chaine.toString();}
+		
 	}
 	
 	
 	public String installerVendeur(Gaulois vendeur, String produit, int nbProduit) {
+		
 		int n=marche.trouverEtalLibre();
 		StringBuilder chaine = new StringBuilder();
 		chaine.append(vendeur.getNom()+" cherche un endroit pour vendre "+nbProduit+" "+produit+"\n");
